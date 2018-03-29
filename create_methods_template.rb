@@ -14,6 +14,10 @@ class Author
       super
     end
   end
+
+  def respond_to_missing?(method_name, include_private = false)
+    method_name.to_s.start_with?('author_') || super
+  end
 end
 
 author = Author.new
@@ -22,4 +26,5 @@ author.last_name = "Newport"
 author.genre = "Computer Science"
 
 p author.author_genre
-p author.respond_to?(:author_genre)
+p author.respond_to?(:author_genre) # not good if you want that method to be available
+
